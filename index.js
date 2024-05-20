@@ -10,7 +10,7 @@ const server = express();
 server.use(express.json())
 server.use(cros())
 
-port = +process.env.PORT
+const port = +process.env.PORT
 
 server.use('/user',userRouter)
 
