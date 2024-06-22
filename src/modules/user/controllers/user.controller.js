@@ -19,6 +19,20 @@ export const addUser = CatchAsyncError(async (req, res) => {
     res.status(201).json({ message: "User Created Successfully " })
 })
 
+export const getUser = CatchAsyncError(async (req, res) => {
+
+  const { token } = req.body
+
+  const {name} = jwt.decode(token,process.env.SECRET_KEY)
+
+  const user = await userModel.findOne({ name },{password:false ,_id:false})
+
+  if(!user) throw new AppError("User Not Found !") 
+
+
+  res.status(201).json({ message: "Successfully " ,user })
+})
+
 
 
 export const login = CatchAsyncError(async (req, res) => {
